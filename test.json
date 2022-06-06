@@ -1,0 +1,4238 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Restful API 列表",
+        "title": "写稿工具OpenAPI"
+    },
+    "host": "moctest.sobeylingyun.com",
+    "basePath": "/articleeditor",
+    "tags": [
+        {
+            "name": "稿件推送接口",
+            "description": "Push Controller"
+        },
+        {
+            "name": "稿件插件相关接口",
+            "description": "Article Plugin Controller"
+        },
+        {
+            "name": "稿件日志相关接口",
+            "description": "Article Log Controller"
+        },
+        {
+            "name": "稿件流程相关接口",
+            "description": "Article Wkf Controller"
+        },
+        {
+            "name": "稿件版本相关接口",
+            "description": "Article History Controller"
+        },
+        {
+            "name": "稿件相关接口",
+            "description": "Article Controller"
+        }
+    ],
+    "paths": {
+        "/articleeditor/api/v1/article": {
+            "get": {
+                "tags": [
+                    "稿件相关接口"
+                ],
+                "summary": "查询详情,伴随着审核信息和账号列表",
+                "operationId": "detailUsingGET_1",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "稿件id",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "65ba832afbbf4d259241758cf0e48771"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/稿件实体_1",
+                            "originalRef": "稿件实体_1"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "post": {
+                "tags": [
+                    "稿件相关接口"
+                ],
+                "summary": "添加稿件",
+                "operationId": "addArticleUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "articleVO",
+                        "description": "articleVO",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/稿件实体",
+                            "originalRef": "稿件实体"
+                        }
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    },
+                    {
+                        "name": "taskId",
+                        "in": "query",
+                        "description": "taskId",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/id 返回对象",
+                            "originalRef": "id 返回对象"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "put": {
+                "tags": [
+                    "稿件相关接口"
+                ],
+                "summary": "更新稿件",
+                "operationId": "updateUsingPUT_2",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "articleVO",
+                        "description": "articleVO",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/稿件实体",
+                            "originalRef": "稿件实体"
+                        }
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/id 返回对象",
+                            "originalRef": "id 返回对象"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/articleeditor/api/v1/article-history/compare": {
+            "post": {
+                "tags": [
+                    "稿件版本相关接口"
+                ],
+                "summary": "版本比较",
+                "operationId": "compareUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "fid",
+                        "in": "query",
+                        "description": "版本id1",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "aea4b993d6bd7346a96f40feeecea67a"
+                    },
+                    {
+                        "name": "sid",
+                        "in": "query",
+                        "description": "版本id2",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "aea4b993d6bd7346a96f40feeecea67a"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/版本比较结果",
+                            "originalRef": "版本比较结果"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/articleeditor/api/v1/article-history/detail/{id}": {
+            "get": {
+                "tags": [
+                    "稿件版本相关接口"
+                ],
+                "summary": "查询版本详情",
+                "operationId": "detailUsingGET_2",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "版本id",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "aea4b993d6bd7346a96f40feeecea67a"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ArticleHistoryVO",
+                            "originalRef": "ArticleHistoryVO"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/articleeditor/api/v1/article-history/remark/{id}": {
+            "put": {
+                "tags": [
+                    "稿件版本相关接口"
+                ],
+                "summary": "备注版本",
+                "operationId": "remarkUsingPUT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "版本id",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "aea4b993d6bd7346a96f40feeecea67a"
+                    },
+                    {
+                        "name": "mark",
+                        "in": "query",
+                        "description": "备注信息",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "内容过时了.."
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/状态信息",
+                            "originalRef": "状态信息"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/articleeditor/api/v1/article-history/{id}": {
+            "get": {
+                "tags": [
+                    "稿件版本相关接口"
+                ],
+                "summary": "查询版本列表",
+                "operationId": "listUsingGET_1",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "稿件id",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "65ba832afbbf4d259241758cf0e48771"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ArticleHistoryVO",
+                                "originalRef": "ArticleHistoryVO"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "稿件版本相关接口"
+                ],
+                "summary": "删除版本",
+                "operationId": "deleteUsingDELETE_1",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "版本id",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "aea4b993d6bd7346a96f40feeecea67a"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/状态信息",
+                            "originalRef": "状态信息"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/articleeditor/api/v1/article-log/{id}": {
+            "get": {
+                "tags": [
+                    "稿件日志相关接口"
+                ],
+                "summary": "操作记录",
+                "operationId": "logUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "稿件id",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "65ba832afbbf4d259241758cf0e48771"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/稿件日志实体",
+                                "originalRef": "稿件日志实体"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/articleeditor/api/v1/article-plugin": {
+            "post": {
+                "tags": [
+                    "稿件插件相关接口"
+                ],
+                "summary": "推送稿件",
+                "operationId": "pushArticlePluginUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "articlePluginVO",
+                        "description": "articlePluginVO",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/插件稿件信息",
+                            "originalRef": "插件稿件信息"
+                        }
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/articleeditor/api/v1/article-wkf/audit/list": {
+            "get": {
+                "tags": [
+                    "稿件流程相关接口"
+                ],
+                "summary": "我的审核任务稿件列表",
+                "operationId": "auditListUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "endTime",
+                        "in": "query",
+                        "description": "创建结束时间",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "2021-04-14"
+                    },
+                    {
+                        "name": "instanceStatus",
+                        "in": "query",
+                        "description": "流程状态",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "RUNNING",
+                        "enum": [
+                            "RUNNING",
+                            "END"
+                        ]
+                    },
+                    {
+                        "name": "pageNum",
+                        "in": "query",
+                        "description": "页码，0表示查询所有",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "1"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "每页个数，0表示查询所有",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "20"
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "排序方式 desc：倒叙 asc：正序",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "desc"
+                    },
+                    {
+                        "name": "sortBy",
+                        "in": "query",
+                        "description": "排序字段",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "update_date"
+                    },
+                    {
+                        "name": "startTime",
+                        "in": "query",
+                        "description": "创建开始时间",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "2021-04-13"
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "标题",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "xxx"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/分页信息«Article,稿件实体»",
+                            "originalRef": "分页信息«Article,稿件实体»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/articleeditor/api/v1/article-wkf/drive/{id}": {
+            "post": {
+                "tags": [
+                    "稿件流程相关接口"
+                ],
+                "summary": "驱动审核流程",
+                "operationId": "driveWkfInstanceUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "稿件id",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "65ba832afbbf4d259241758cf0e48771"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    },
+                    {
+                        "in": "body",
+                        "name": "workFlowDriveVO",
+                        "description": "workFlowDriveVO",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/流程驱动请求体",
+                            "originalRef": "流程驱动请求体"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/流程单次的执行信息",
+                            "originalRef": "流程单次的执行信息"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/articleeditor/api/v1/article/batch-delete": {
+            "delete": {
+                "tags": [
+                    "稿件相关接口"
+                ],
+                "summary": "批量删除稿件",
+                "operationId": "deleteBatchUsingDELETE",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "idList",
+                        "description": "idList",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/状态信息",
+                            "originalRef": "状态信息"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/articleeditor/api/v1/article/batchSave": {
+            "post": {
+                "tags": [
+                    "稿件相关接口"
+                ],
+                "summary": "批量添加或者更新稿件，如果没有传id则是新增，否则更新 ",
+                "operationId": "batchAddOrUpdateUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "articleVOList",
+                        "description": "articleVOList",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/稿件实体",
+                                "originalRef": "稿件实体"
+                            }
+                        }
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/articleeditor/api/v1/article/child-detail/{id}": {
+            "get": {
+                "tags": [
+                    "稿件相关接口"
+                ],
+                "summary": "查询子稿带正文等详细信息列表，伴随着渠道和审核信息和账号列表",
+                "operationId": "childWithDetailUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "父稿id",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "65ba832afbbf4d259241758cf0e48771"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/稿件实体_1",
+                                "originalRef": "稿件实体_1"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/articleeditor/api/v1/article/child/{id}": {
+            "get": {
+                "tags": [
+                    "稿件相关接口"
+                ],
+                "summary": "查询子稿列表，伴随着账号列表",
+                "operationId": "childUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "父稿id",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "65ba832afbbf4d259241758cf0e48771"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/稿件实体_1",
+                                "originalRef": "稿件实体_1"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "稿件相关接口"
+                ],
+                "summary": "断链",
+                "operationId": "removeChildUsingDELETE",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "需要断链的子稿id",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "65ba832afbbf4d259241758cf0e48771"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/状态信息",
+                            "originalRef": "状态信息"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/articleeditor/api/v1/article/download-list": {
+            "get": {
+                "tags": [
+                    "稿件相关接口"
+                ],
+                "summary": "下载稿件数据",
+                "operationId": "downLoadListUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "query",
+                        "description": "发布账号id",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "6488c1474eaf45d9818dce0b36c35918"
+                    },
+                    {
+                        "name": "channelId",
+                        "in": "query",
+                        "description": "渠道id",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "6488c1474eaf45d9818dce0b36c35918"
+                    },
+                    {
+                        "name": "creator",
+                        "in": "query",
+                        "description": "创建人code",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "6488c1474eaf45d9818dce0b36c35918"
+                    },
+                    {
+                        "name": "endTime",
+                        "in": "query",
+                        "description": "创建结束时间",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "2021-04-14"
+                    },
+                    {
+                        "name": "publishEndTime",
+                        "in": "query",
+                        "description": "发布结束时间",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "2021-04-14"
+                    },
+                    {
+                        "name": "publishStartTime",
+                        "in": "query",
+                        "description": "发布开始时间",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "2021-04-13"
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "排序方式 desc：倒叙 asc：正序",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "desc"
+                    },
+                    {
+                        "name": "sortBy",
+                        "in": "query",
+                        "description": "排序字段",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "create_date"
+                    },
+                    {
+                        "name": "startTime",
+                        "in": "query",
+                        "description": "创建开始时间",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "2021-04-13"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "状态，-10 回收站 0 初稿/草稿 10 审核中 30 推送中 40 推送完成 50 推送失败 60 审核退回 70 审核通过",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "0"
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "标题",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "test"
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "稿件类型，1图文 2图片 5视频 7社交媒体",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "1"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/articleeditor/api/v1/article/lib/{id}": {
+            "post": {
+                "tags": [
+                    "稿件相关接口"
+                ],
+                "summary": "稿件入库",
+                "operationId": "addTONrkUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "稿件id",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "65ba832afbbf4d259241758cf0e48771"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/内容库id",
+                            "originalRef": "内容库id"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "put": {
+                "tags": [
+                    "稿件相关接口"
+                ],
+                "summary": "更新图文素材",
+                "operationId": "updateTONrkUsingPUT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "contentId",
+                        "in": "query",
+                        "description": "素材id",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "65ba832afbbf4d259241758cf0e48771"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "稿件id",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "222"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/内容库id",
+                            "originalRef": "内容库id"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/articleeditor/api/v1/article/list": {
+            "get": {
+                "tags": [
+                    "稿件相关接口"
+                ],
+                "summary": "查询稿件列表，只有账号信息，不带渠道信息",
+                "operationId": "listUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "query",
+                        "description": "发布账号id",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "6488c1474eaf45d9818dce0b36c35918"
+                    },
+                    {
+                        "name": "channelId",
+                        "in": "query",
+                        "description": "渠道id",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "6488c1474eaf45d9818dce0b36c35918"
+                    },
+                    {
+                        "name": "creator",
+                        "in": "query",
+                        "description": "创建人code",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "6488c1474eaf45d9818dce0b36c35918"
+                    },
+                    {
+                        "name": "endTime",
+                        "in": "query",
+                        "description": "创建结束时间",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "2021-04-14"
+                    },
+                    {
+                        "name": "pageNum",
+                        "in": "query",
+                        "description": "页码，0表示查询所有",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "1"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "每页个数，0表示查询所有",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "10"
+                    },
+                    {
+                        "name": "publishEndTime",
+                        "in": "query",
+                        "description": "发布结束时间",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "2021-04-14"
+                    },
+                    {
+                        "name": "publishStartTime",
+                        "in": "query",
+                        "description": "发布开始时间",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "2021-04-13"
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "排序方式 desc：倒叙 asc：正序",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "desc"
+                    },
+                    {
+                        "name": "sortBy",
+                        "in": "query",
+                        "description": "排序字段",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "create_date"
+                    },
+                    {
+                        "name": "startTime",
+                        "in": "query",
+                        "description": "创建开始时间",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "2021-04-13"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "状态，-10 回收站 0 初稿/草稿 10 审核中 30 推送中 40 推送完成 50 推送失败 60 审核退回 70 审核通过",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "0"
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "标题",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "test"
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "稿件类型，1图文 2图片 5视频 7社交媒体",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "1"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/分页信息«Article,稿件实体»",
+                            "originalRef": "分页信息«Article,稿件实体»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/articleeditor/api/v1/article/recycle/{id}": {
+            "delete": {
+                "tags": [
+                    "稿件相关接口"
+                ],
+                "summary": "删除稿件，放入回收站",
+                "operationId": "recycleUsingDELETE",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "稿件id",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "65ba832afbbf4d259241758cf0e48771"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/状态信息",
+                            "originalRef": "状态信息"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/articleeditor/api/v1/article/resume/{id}": {
+            "put": {
+                "tags": [
+                    "稿件相关接口"
+                ],
+                "summary": "恢复稿件",
+                "operationId": "resumeUsingPUT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "稿件id",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "65ba832afbbf4d259241758cf0e48771"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/状态信息",
+                            "originalRef": "状态信息"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/articleeditor/api/v1/article/wx-article-detail": {
+            "get": {
+                "tags": [
+                    "稿件相关接口"
+                ],
+                "summary": "爬取微信文章链接内容",
+                "operationId": "wxArticleDetailUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "url",
+                        "in": "query",
+                        "description": "文章链接",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "https://mp.weixin.qq.com/s/472xHPoCtmyeF16hhHd8qQ"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/微信爬取返回体",
+                            "originalRef": "微信爬取返回体"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/articleeditor/api/v1/article/{id}": {
+            "delete": {
+                "tags": [
+                    "稿件相关接口"
+                ],
+                "summary": "删除稿件",
+                "operationId": "deleteUsingDELETE",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "稿件id",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "65ba832afbbf4d259241758cf0e48771"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/状态信息",
+                            "originalRef": "状态信息"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/articleeditor/api/v1/push/callback": {
+            "post": {
+                "tags": [
+                    "稿件推送接口"
+                ],
+                "summary": "稿件推送回调",
+                "operationId": "callbackUsingPOST_1",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "callbackVO",
+                        "description": "callbackVO",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CallBackVO",
+                            "originalRef": "CallBackVO"
+                        }
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Article",
+                            "originalRef": "Article"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/articleeditor/api/v1/push/child/{parentId}": {
+            "post": {
+                "tags": [
+                    "稿件推送接口"
+                ],
+                "summary": "发起一稿多发推送",
+                "operationId": "batchPushUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "parentId",
+                        "in": "path",
+                        "description": "父稿的id",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "65ba832afbbf4d259241758cf0e48771"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/状态信息",
+                            "originalRef": "状态信息"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/articleeditor/api/v1/push/{id}": {
+            "post": {
+                "tags": [
+                    "稿件推送接口"
+                ],
+                "summary": "稿件推送",
+                "operationId": "pushUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "稿件id",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "65ba832afbbf4d259241758cf0e48771"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "认证信息token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lang",
+                        "in": "header",
+                        "description": "国际化",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "zh_CN",
+                            "en_US"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/状态信息",
+                            "originalRef": "状态信息"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        }
+    },
+    "definitions": {
+        "AITask": {
+            "type": "object",
+            "properties": {
+                "create_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "refType": null
+                },
+                "detailUrl": {
+                    "type": "string",
+                    "refType": null
+                },
+                "id": {
+                    "type": "string",
+                    "refType": null
+                },
+                "relationId": {
+                    "type": "string",
+                    "refType": null
+                },
+                "site": {
+                    "type": "string",
+                    "refType": null
+                },
+                "status": {
+                    "type": "integer",
+                    "format": "int32",
+                    "refType": null
+                },
+                "sync": {
+                    "type": "integer",
+                    "format": "int32",
+                    "refType": null
+                },
+                "taskRequest": {
+                    "type": "string",
+                    "refType": null
+                },
+                "taskResult": {
+                    "type": "string",
+                    "refType": null
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "TEXT_CHECK",
+                        "TITLE_GENERATE",
+                        "TITLE_EXTRACTION",
+                        "TEXT_AUDIT",
+                        "IMAGE_AUDIT",
+                        "VIDEO_AUDIT",
+                        "SUMMARY",
+                        "CLASS",
+                        "TAG",
+                        "TRANSLATE"
+                    ],
+                    "refType": null
+                },
+                "update_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "refType": null
+                }
+            },
+            "title": "AITask"
+        },
+        "Account": {
+            "type": "object",
+            "properties": {
+                "accountArticleTypes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AccountArticleType",
+                        "originalRef": "AccountArticleType"
+                    },
+                    "refType": "AccountArticleType"
+                },
+                "accountName": {
+                    "type": "string",
+                    "refType": null
+                },
+                "channelId": {
+                    "type": "string",
+                    "refType": null
+                },
+                "clientId": {
+                    "type": "string",
+                    "refType": null
+                },
+                "clientSecret": {
+                    "type": "string",
+                    "refType": null
+                },
+                "create_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "refType": null
+                },
+                "expiredTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "refType": null
+                },
+                "extend": {
+                    "type": "string",
+                    "refType": null
+                },
+                "headImg": {
+                    "type": "string",
+                    "refType": null
+                },
+                "id": {
+                    "type": "string",
+                    "refType": null
+                },
+                "plat": {
+                    "type": "string",
+                    "refType": null
+                },
+                "platAccountId": {
+                    "type": "string",
+                    "refType": null
+                },
+                "platName": {
+                    "type": "string",
+                    "refType": null
+                },
+                "site": {
+                    "type": "string",
+                    "refType": null
+                },
+                "token": {
+                    "type": "string",
+                    "refType": null
+                },
+                "type": {
+                    "type": "integer",
+                    "format": "int32",
+                    "refType": null
+                },
+                "update_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "refType": null
+                }
+            },
+            "title": "Account"
+        },
+        "AccountArticleType": {
+            "type": "object",
+            "properties": {
+                "accountId": {
+                    "type": "string",
+                    "refType": null
+                },
+                "articleType": {
+                    "type": "integer",
+                    "format": "int32",
+                    "refType": null
+                },
+                "site": {
+                    "type": "string",
+                    "refType": null
+                }
+            },
+            "title": "AccountArticleType"
+        },
+        "Article": {
+            "type": "object",
+            "properties": {
+                "accountIdList": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "accountList": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Account",
+                        "originalRef": "Account"
+                    }
+                },
+                "adtWkfId": {
+                    "type": "string"
+                },
+                "aiTaskList": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AITask",
+                        "originalRef": "AITask"
+                    }
+                },
+                "articleData": {
+                    "$ref": "#/definitions/ArticleData",
+                    "originalRef": "ArticleData"
+                },
+                "auditNodeList": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/WorkFlowNode",
+                        "originalRef": "WorkFlowNode"
+                    }
+                },
+                "author": {
+                    "type": "string"
+                },
+                "channel": {
+                    "$ref": "#/definitions/Channel",
+                    "originalRef": "Channel"
+                },
+                "channelId": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "contentId": {
+                    "type": "string"
+                },
+                "createUserCode": {
+                    "type": "string"
+                },
+                "createUserName": {
+                    "type": "string"
+                },
+                "create_date": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "editUserCode": {
+                    "type": "string"
+                },
+                "editUserName": {
+                    "type": "string"
+                },
+                "extend": {
+                    "type": "string"
+                },
+                "follow": {
+                    "type": "string"
+                },
+                "grade": {
+                    "$ref": "#/definitions/Grade",
+                    "originalRef": "Grade"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "keyword": {
+                    "type": "string"
+                },
+                "logoInfo": {
+                    "type": "string"
+                },
+                "materials": {
+                    "type": "string"
+                },
+                "parentId": {
+                    "type": "string"
+                },
+                "platId": {
+                    "type": "string"
+                },
+                "publishUserCode": {
+                    "type": "string"
+                },
+                "publishUserName": {
+                    "type": "string"
+                },
+                "publish_date": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "site": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "statusStr": {
+                    "type": "string"
+                },
+                "summary": {
+                    "type": "string"
+                },
+                "taskId": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "update_date": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "title": "Article"
+        },
+        "ArticleData": {
+            "type": "object",
+            "properties": {
+                "accessNum": {
+                    "type": "integer",
+                    "format": "int32",
+                    "refType": null
+                },
+                "articleId": {
+                    "type": "string",
+                    "refType": null
+                },
+                "collectNum": {
+                    "type": "integer",
+                    "format": "int32",
+                    "refType": null
+                },
+                "commentNum": {
+                    "type": "integer",
+                    "format": "int32",
+                    "refType": null
+                },
+                "likeNum": {
+                    "type": "integer",
+                    "format": "int32",
+                    "refType": null
+                },
+                "shareNum": {
+                    "type": "integer",
+                    "format": "int32",
+                    "refType": null
+                }
+            },
+            "title": "ArticleData"
+        },
+        "ArticleHistoryVO": {
+            "type": "object",
+            "properties": {
+                "articleId": {
+                    "type": "string",
+                    "description": "源稿件id"
+                },
+                "author": {
+                    "type": "string",
+                    "description": "作者"
+                },
+                "content": {
+                    "type": "string",
+                    "description": "内容"
+                },
+                "create_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "创建时间，任何操作都不传，只读"
+                },
+                "editUserName": {
+                    "type": "string",
+                    "description": "编辑人"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "全局唯一主键，添加时不传，更新填写"
+                },
+                "keyword": {
+                    "type": "string",
+                    "description": "关键词"
+                },
+                "logos": {
+                    "type": "array",
+                    "description": "封面集",
+                    "items": {
+                        "$ref": "#/definitions/素材信息",
+                        "originalRef": "素材信息"
+                    }
+                },
+                "mark": {
+                    "type": "string",
+                    "description": "版本备注信息"
+                },
+                "materials": {
+                    "type": "array",
+                    "description": "素材集合",
+                    "items": {
+                        "$ref": "#/definitions/素材信息",
+                        "originalRef": "素材信息"
+                    }
+                },
+                "summary": {
+                    "type": "string",
+                    "description": "摘要"
+                },
+                "title": {
+                    "type": "string",
+                    "description": "标题"
+                },
+                "type": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "类型"
+                },
+                "update_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "修改时间，任何操作都不传，只读"
+                }
+            },
+            "title": "ArticleHistoryVO"
+        },
+        "CallBackVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "refType": null
+                },
+                "msg": {
+                    "type": "string",
+                    "refType": null
+                },
+                "platId": {
+                    "type": "string",
+                    "refType": null
+                },
+                "taskid": {
+                    "type": "string",
+                    "refType": null
+                }
+            },
+            "title": "CallBackVO"
+        },
+        "Channel": {
+            "type": "object",
+            "properties": {
+                "accountList": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Account",
+                        "originalRef": "Account"
+                    },
+                    "refType": "Account"
+                },
+                "articleTypes": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "refType": "integer"
+                },
+                "check": {
+                    "type": "string",
+                    "refType": null
+                },
+                "code": {
+                    "type": "string",
+                    "refType": null
+                },
+                "create_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "refType": null
+                },
+                "extend": {
+                    "type": "string",
+                    "refType": null
+                },
+                "field": {
+                    "type": "string",
+                    "refType": null
+                },
+                "id": {
+                    "type": "string",
+                    "refType": null
+                },
+                "inner_": {
+                    "type": "integer",
+                    "format": "int32",
+                    "refType": null
+                },
+                "logo": {
+                    "type": "string",
+                    "refType": null
+                },
+                "name": {
+                    "type": "string",
+                    "refType": null
+                },
+                "site": {
+                    "type": "string",
+                    "refType": null
+                },
+                "update_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "refType": null
+                },
+                "url": {
+                    "type": "string",
+                    "refType": null
+                },
+                "workFlow": {
+                    "$ref": "#/definitions/WorkFlow",
+                    "originalRef": "WorkFlow",
+                    "refType": "WorkFlow"
+                }
+            },
+            "title": "Channel"
+        },
+        "Grade": {
+            "type": "object",
+            "properties": {
+                "articleId": {
+                    "type": "string",
+                    "refType": null
+                },
+                "create_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "refType": null
+                },
+                "gradeUserName": {
+                    "type": "string",
+                    "refType": null
+                },
+                "score": {
+                    "type": "integer",
+                    "format": "int32",
+                    "refType": null
+                },
+                "update_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "refType": null
+                }
+            },
+            "title": "Grade"
+        },
+        "WkfExecLogVO": {
+            "type": "object",
+            "properties": {
+                "create_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "创建时间，任何操作都不传，只读"
+                },
+                "executionDate": {
+                    "type": "string"
+                },
+                "executionUser": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "全局唯一主键，添加时不传，更新填写"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "remark": {
+                    "type": "string"
+                },
+                "update_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "修改时间，任何操作都不传，只读"
+                },
+                "wkfInstanceId": {
+                    "type": "string"
+                }
+            },
+            "title": "WkfExecLogVO"
+        },
+        "WorkFlow": {
+            "type": "object",
+            "properties": {
+                "createUser": {
+                    "type": "string",
+                    "refType": null
+                },
+                "create_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "refType": null
+                },
+                "id": {
+                    "type": "string",
+                    "refType": null
+                },
+                "name": {
+                    "type": "string",
+                    "refType": null
+                },
+                "site": {
+                    "type": "string",
+                    "refType": null
+                },
+                "text": {
+                    "type": "string",
+                    "refType": null
+                },
+                "updateUser": {
+                    "type": "string",
+                    "refType": null
+                },
+                "update_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "refType": null
+                }
+            },
+            "title": "WorkFlow"
+        },
+        "WorkFlowNode": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "string",
+                    "refType": null
+                },
+                "id": {
+                    "type": "string",
+                    "refType": null
+                },
+                "name": {
+                    "type": "string",
+                    "refType": null
+                },
+                "nodeType": {
+                    "type": "string",
+                    "enum": [
+                        "STARTNODE",
+                        "ENDNODE",
+                        "ACTIONNODE",
+                        "STEPNODE"
+                    ],
+                    "refType": null
+                },
+                "source": {
+                    "type": "string",
+                    "refType": null
+                },
+                "sourceList": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "refType": "string"
+                },
+                "target": {
+                    "type": "string",
+                    "refType": null
+                },
+                "targetList": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "refType": "string"
+                },
+                "workflowId": {
+                    "type": "string",
+                    "refType": null
+                }
+            },
+            "title": "WorkFlowNode"
+        },
+        "id 返回对象": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "唯一主键"
+                }
+            },
+            "title": "id 返回对象"
+        },
+        "下拉选项": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "选项名",
+                    "refType": null
+                },
+                "value": {
+                    "type": "string",
+                    "description": "选项值",
+                    "refType": null
+                }
+            },
+            "title": "下拉选项"
+        },
+        "内容库id": {
+            "type": "object",
+            "properties": {
+                "contentId": {
+                    "type": "string",
+                    "description": "内容id"
+                }
+            },
+            "title": "内容库id"
+        },
+        "分数实体": {
+            "type": "object",
+            "properties": {
+                "create_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "创建时间，任何操作都不传，只读",
+                    "refType": null
+                },
+                "gradeUserName": {
+                    "type": "string",
+                    "description": "打分人",
+                    "refType": null
+                },
+                "id": {
+                    "type": "string",
+                    "description": "全局唯一主键，添加时不传，更新填写",
+                    "refType": null
+                },
+                "score": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "分数",
+                    "refType": null
+                },
+                "update_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "修改时间，任何操作都不传，只读",
+                    "refType": null
+                }
+            },
+            "title": "分数实体"
+        },
+        "分页信息«Article,稿件实体»": {
+            "type": "object",
+            "properties": {
+                "list": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/稿件实体_1",
+                        "originalRef": "稿件实体_1"
+                    }
+                },
+                "pageCount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "总页数"
+                },
+                "pageNum": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "偏移量 从1开始"
+                },
+                "pageSize": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "每页数量"
+                },
+                "total": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "总记录数"
+                }
+            },
+            "title": "分页信息«Article,稿件实体»",
+            "description": "查询分页通用对象"
+        },
+        "微信爬取返回体": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "string",
+                    "description": "正文"
+                },
+                "logo": {
+                    "type": "string",
+                    "description": "封面"
+                },
+                "title": {
+                    "type": "string",
+                    "description": "标题"
+                }
+            },
+            "title": "微信爬取返回体"
+        },
+        "扩展信息": {
+            "type": "object",
+            "properties": {
+                "articleCheck": {
+                    "description": "图文稿校验信息",
+                    "$ref": "#/definitions/校验实体",
+                    "originalRef": "校验实体",
+                    "refType": "校验实体"
+                },
+                "socialCheck": {
+                    "$ref": "#/definitions/校验实体",
+                    "originalRef": "校验实体",
+                    "refType": "校验实体"
+                },
+                "videoCheck": {
+                    "description": "视频稿校验信息",
+                    "$ref": "#/definitions/校验实体",
+                    "originalRef": "校验实体",
+                    "refType": "校验实体"
+                }
+            },
+            "title": "扩展信息"
+        },
+        "扩展属性": {
+            "type": "object",
+            "properties": {
+                "dateFormat": {
+                    "type": "string",
+                    "description": "时间格式",
+                    "refType": null
+                },
+                "fontLimit": {
+                    "type": "array",
+                    "description": "字符限制，第一项表示最小字符数，第二项表示最大字符数。标签类型的话表示每个标签的字符限制",
+                    "items": {
+                        "type": "string"
+                    },
+                    "refType": "string"
+                },
+                "ifMulty": {
+                    "type": "string",
+                    "description": "是否多选，标识下拉框选项是否为多选",
+                    "refType": null
+                },
+                "multi": {
+                    "type": "boolean",
+                    "refType": null
+                },
+                "parentSelectEnable": {
+                    "type": "boolean",
+                    "description": "树形下拉框是否可以选择父级",
+                    "refType": null
+                },
+                "regular": {
+                    "type": "string",
+                    "description": "正则表达式",
+                    "refType": null
+                },
+                "setting": {
+                    "type": "array",
+                    "description": "下拉选项集合",
+                    "items": {
+                        "$ref": "#/definitions/下拉选项",
+                        "originalRef": "下拉选项"
+                    },
+                    "refType": "下拉选项"
+                },
+                "tagLimit": {
+                    "type": "array",
+                    "description": "标签限制，标签的个数限制，第一项表示最小个数，第二项表示最大个数。",
+                    "items": {
+                        "type": "string"
+                    },
+                    "refType": "string"
+                },
+                "tips": {
+                    "type": "string",
+                    "description": "提示信息",
+                    "refType": null
+                },
+                "treeData": {
+                    "type": "array",
+                    "description": "树形下拉框选项集合",
+                    "items": {
+                        "$ref": "#/definitions/树形下拉选项",
+                        "originalRef": "树形下拉选项"
+                    },
+                    "refType": "树形下拉选项"
+                },
+                "treeValueWithPValue": {
+                    "type": "boolean",
+                    "description": "树形下拉框的值是否已伴随着父id, 比如 p1,p11,p111...,v1",
+                    "refType": null
+                }
+            },
+            "title": "扩展属性"
+        },
+        "扩展属性_1": {
+            "type": "object",
+            "properties": {
+                "dateFormat": {
+                    "type": "string",
+                    "description": "时间格式"
+                },
+                "fontLimit": {
+                    "type": "array",
+                    "description": "字符限制，第一项表示最小字符数，第二项表示最大字符数。标签类型的话表示每个标签的字符限制",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "ifMulty": {
+                    "type": "string",
+                    "description": "是否多选，标识下拉框选项是否为多选"
+                },
+                "parentSelectEnable": {
+                    "type": "string",
+                    "description": "树形下拉框是否可以选择父级"
+                },
+                "regular": {
+                    "type": "string",
+                    "description": "正则表达式"
+                },
+                "setting": {
+                    "type": "array",
+                    "description": "下拉选项集合",
+                    "items": {
+                        "$ref": "#/definitions/下拉选项",
+                        "originalRef": "下拉选项"
+                    }
+                },
+                "tagLimit": {
+                    "type": "array",
+                    "description": "标签限制，标签的个数限制，第一项表示最小个数，第二项表示最大个数。",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "tips": {
+                    "type": "string",
+                    "description": "提示信息"
+                },
+                "treeData": {
+                    "type": "array",
+                    "description": "树形下拉框选项集合",
+                    "items": {
+                        "$ref": "#/definitions/树形下拉选项",
+                        "originalRef": "树形下拉选项"
+                    }
+                },
+                "treeValueWithPValue": {
+                    "type": "string",
+                    "description": "树形下拉框的值是否已伴随着父id, 比如 p1,p11,p111...,v1"
+                }
+            },
+            "title": "扩展属性_1"
+        },
+        "插件稿件信息": {
+            "type": "object",
+            "properties": {
+                "articleList": {
+                    "type": "array",
+                    "description": "待发布的稿件信息列表",
+                    "items": {
+                        "$ref": "#/definitions/稿件关键信息",
+                        "originalRef": "稿件关键信息"
+                    }
+                },
+                "contentId": {
+                    "type": "string",
+                    "description": "待发布的素材id"
+                }
+            },
+            "title": "插件稿件信息"
+        },
+        "智能任务": {
+            "type": "object",
+            "properties": {
+                "create_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "创建时间，任何操作都不传，只读",
+                    "refType": null
+                },
+                "id": {
+                    "type": "string",
+                    "description": "全局唯一主键，添加时不传，更新填写",
+                    "refType": null
+                },
+                "status": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "状态",
+                    "refType": null
+                },
+                "taskResult": {
+                    "type": "object",
+                    "description": "结果，仅在成功会返回",
+                    "refType": null
+                },
+                "type": {
+                    "type": "string",
+                    "description": "任务类型",
+                    "enum": [
+                        "TEXT_CHECK",
+                        "IMAGE_AUDIT",
+                        "VIDEO_AUDIT"
+                    ],
+                    "refType": null
+                },
+                "update_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "修改时间，任何操作都不传，只读",
+                    "refType": null
+                }
+            },
+            "title": "智能任务"
+        },
+        "树形下拉选项": {
+            "type": "object",
+            "properties": {
+                "children": {
+                    "type": "array",
+                    "description": "子集",
+                    "items": {
+                        "$ref": "#/definitions/树形下拉选项",
+                        "originalRef": "树形下拉选项"
+                    },
+                    "refType": "树形下拉选项"
+                },
+                "key": {
+                    "type": "string",
+                    "description": "选项值",
+                    "refType": null
+                },
+                "pkey": {
+                    "type": "string",
+                    "refType": null
+                },
+                "title": {
+                    "type": "string",
+                    "description": "选项名",
+                    "refType": null
+                }
+            },
+            "title": "树形下拉选项"
+        },
+        "校验实体": {
+            "type": "object",
+            "properties": {
+                "contentLenLimit": {
+                    "type": "array",
+                    "description": "正文长度区间",
+                    "items": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "refType": "integer"
+                },
+                "logoNumLimit": {
+                    "type": "array",
+                    "description": "封面个数区间",
+                    "items": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "refType": "integer"
+                },
+                "picNumLimit": {
+                    "type": "array",
+                    "description": "图片个数区间",
+                    "items": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "refType": "integer"
+                },
+                "titleLenLimit": {
+                    "type": "array",
+                    "description": "标题长度区间",
+                    "items": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "refType": "integer"
+                },
+                "vidNumLimit": {
+                    "type": "array",
+                    "description": "视频个数区间",
+                    "items": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "refType": "integer"
+                }
+            },
+            "title": "校验实体"
+        },
+        "流程单次的执行信息": {
+            "type": "object",
+            "properties": {
+                "execLogList": {
+                    "type": "array",
+                    "description": "单次执行记录列表",
+                    "items": {
+                        "$ref": "#/definitions/WkfExecLogVO",
+                        "originalRef": "WkfExecLogVO"
+                    }
+                },
+                "instanceId": {
+                    "type": "string",
+                    "description": "流程实例id"
+                },
+                "instanceStatus": {
+                    "type": "string",
+                    "description": "流程状态",
+                    "enum": [
+                        "START",
+                        "RUNNING",
+                        "RETURN",
+                        "END"
+                    ]
+                }
+            },
+            "title": "流程单次的执行信息"
+        },
+        "流程定义": {
+            "type": "object",
+            "properties": {
+                "create_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "创建时间，任何操作都不传，只读",
+                    "refType": null
+                },
+                "id": {
+                    "type": "string",
+                    "description": "全局唯一主键，添加时不传，更新填写",
+                    "refType": null
+                },
+                "name": {
+                    "type": "string",
+                    "description": "流程名",
+                    "refType": null
+                },
+                "text": {
+                    "type": "string",
+                    "description": "流程定义json",
+                    "refType": null
+                },
+                "update_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "修改时间，任何操作都不传，只读",
+                    "refType": null
+                }
+            },
+            "title": "流程定义"
+        },
+        "流程节点": {
+            "type": "object",
+            "properties": {
+                "create_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "创建时间，任何操作都不传，只读",
+                    "refType": null
+                },
+                "data": {
+                    "type": "string",
+                    "description": "结点数据",
+                    "refType": null
+                },
+                "id": {
+                    "type": "string",
+                    "description": "全局唯一主键，添加时不传，更新填写",
+                    "refType": null
+                },
+                "name": {
+                    "type": "string",
+                    "description": "流程结点名",
+                    "refType": null
+                },
+                "nodeType": {
+                    "type": "string",
+                    "description": "结点类型",
+                    "enum": [
+                        "STARTNODE",
+                        "ENDNODE",
+                        "ACTIONNODE",
+                        "STEPNODE"
+                    ],
+                    "refType": null
+                },
+                "update_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "修改时间，任何操作都不传，只读",
+                    "refType": null
+                }
+            },
+            "title": "流程节点"
+        },
+        "流程驱动请求体": {
+            "type": "object",
+            "properties": {
+                "nodeId": {
+                    "type": "string",
+                    "description": "下一个结点的id"
+                },
+                "remark": {
+                    "type": "string",
+                    "description": "备注信息"
+                }
+            },
+            "title": "流程驱动请求体"
+        },
+        "渠道实体": {
+            "type": "object",
+            "required": [
+                "articleTypes",
+                "code",
+                "name"
+            ],
+            "properties": {
+                "accountList": {
+                    "type": "array",
+                    "description": "账号列表",
+                    "items": {
+                        "$ref": "#/definitions/账号实体",
+                        "originalRef": "账号实体"
+                    },
+                    "refType": "账号实体"
+                },
+                "articleTypes": {
+                    "type": "array",
+                    "description": "渠道支持的稿件类型，1图文，5视频",
+                    "items": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "refType": "integer"
+                },
+                "check": {
+                    "description": "检测信息",
+                    "$ref": "#/definitions/扩展信息",
+                    "originalRef": "扩展信息",
+                    "refType": "扩展信息"
+                },
+                "code": {
+                    "type": "string",
+                    "description": "渠道code",
+                    "refType": null
+                },
+                "create_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "创建时间，任何操作都不传，只读",
+                    "refType": null
+                },
+                "extend": {
+                    "type": "string",
+                    "description": "扩展信息",
+                    "refType": null
+                },
+                "fieldList": {
+                    "type": "array",
+                    "description": "自定义字段列表",
+                    "items": {
+                        "$ref": "#/definitions/自定义字段实体",
+                        "originalRef": "自定义字段实体"
+                    },
+                    "refType": "自定义字段实体"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "全局唯一主键，添加时不传，更新填写",
+                    "refType": null
+                },
+                "inner_": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "是否为内置的渠道，新增修改时不传，1表示内置，0表示非内置，内置渠道前端展示时不要修改和删除操作",
+                    "refType": null
+                },
+                "logo": {
+                    "type": "string",
+                    "description": "图标",
+                    "refType": null
+                },
+                "name": {
+                    "type": "string",
+                    "description": "渠道名",
+                    "refType": null
+                },
+                "update_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "修改时间，任何操作都不传，只读",
+                    "refType": null
+                },
+                "url": {
+                    "type": "string",
+                    "description": "渠道的接口地址",
+                    "refType": null
+                },
+                "workFlowVO": {
+                    "description": "绑定的工作流",
+                    "$ref": "#/definitions/流程定义",
+                    "originalRef": "流程定义",
+                    "refType": "流程定义"
+                }
+            },
+            "title": "渠道实体"
+        },
+        "渠道实体_1": {
+            "type": "object",
+            "required": [
+                "articleTypes",
+                "code",
+                "name"
+            ],
+            "properties": {
+                "accountList": {
+                    "type": "array",
+                    "description": "账号列表",
+                    "items": {
+                        "$ref": "#/definitions/账号实体",
+                        "originalRef": "账号实体"
+                    }
+                },
+                "articleTypes": {
+                    "type": "array",
+                    "description": "渠道支持的稿件类型，1图文，5视频",
+                    "items": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "check": {
+                    "description": "检测信息",
+                    "$ref": "#/definitions/扩展信息",
+                    "originalRef": "扩展信息"
+                },
+                "code": {
+                    "type": "string",
+                    "description": "渠道code"
+                },
+                "create_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "创建时间，任何操作都不传，只读"
+                },
+                "extend": {
+                    "type": "string",
+                    "description": "扩展信息"
+                },
+                "fieldList": {
+                    "type": "array",
+                    "description": "自定义字段列表",
+                    "items": {
+                        "$ref": "#/definitions/自定义字段实体_1",
+                        "originalRef": "自定义字段实体_1"
+                    }
+                },
+                "id": {
+                    "type": "string",
+                    "description": "全局唯一主键，添加时不传，更新填写"
+                },
+                "inner_": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "是否为内置的渠道，新增修改时不传，1表示内置，0表示非内置，内置渠道前端展示时不要修改和删除操作"
+                },
+                "logo": {
+                    "type": "string",
+                    "description": "图标"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "渠道名"
+                },
+                "update_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "修改时间，任何操作都不传，只读"
+                },
+                "url": {
+                    "type": "string",
+                    "description": "渠道的接口地址"
+                },
+                "workFlowVO": {
+                    "description": "绑定的工作流",
+                    "$ref": "#/definitions/流程定义",
+                    "originalRef": "流程定义"
+                }
+            },
+            "title": "渠道实体_1"
+        },
+        "版本比较结果": {
+            "type": "object",
+            "properties": {
+                "compareHtml": {
+                    "type": "string",
+                    "description": "比较结果"
+                },
+                "htmlOne": {
+                    "type": "string",
+                    "description": "内容1"
+                },
+                "htmlTwo": {
+                    "type": "string",
+                    "description": "内容2"
+                }
+            },
+            "title": "版本比较结果"
+        },
+        "状态信息": {
+            "type": "object",
+            "properties": {
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "成功标识，true表示成功，false表示失败"
+                }
+            },
+            "title": "状态信息",
+            "description": "状态信息"
+        },
+        "稿件关键信息": {
+            "type": "object",
+            "required": [
+                "accountIdList"
+            ],
+            "properties": {
+                "accountIdList": {
+                    "type": "array",
+                    "description": "账号id列表",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "channelId": {
+                    "type": "string",
+                    "description": "渠道id"
+                },
+                "content": {
+                    "type": "string",
+                    "description": "内容"
+                },
+                "extend": {
+                    "type": "array",
+                    "description": "自定义字段集合",
+                    "items": {
+                        "$ref": "#/definitions/自定字段信息",
+                        "originalRef": "自定字段信息"
+                    }
+                },
+                "logos": {
+                    "type": "array",
+                    "description": "封面，预留,目前使用素材关键帧",
+                    "items": {
+                        "$ref": "#/definitions/素材信息",
+                        "originalRef": "素材信息"
+                    }
+                },
+                "title": {
+                    "type": "string",
+                    "description": "标题"
+                },
+                "type": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "类型，目前只有视频5"
+                }
+            },
+            "title": "稿件关键信息"
+        },
+        "稿件实体": {
+            "type": "object",
+            "required": [
+                "accountIdList"
+            ],
+            "properties": {
+                "accountIdList": {
+                    "type": "array",
+                    "description": "账号id列表",
+                    "items": {
+                        "type": "string"
+                    },
+                    "refType": "string"
+                },
+                "accountList": {
+                    "type": "array",
+                    "description": "账号信息",
+                    "items": {
+                        "$ref": "#/definitions/账号实体",
+                        "originalRef": "账号实体"
+                    },
+                    "refType": "账号实体"
+                },
+                "aiTaskVOList": {
+                    "type": "array",
+                    "description": "关联审核任务数据",
+                    "items": {
+                        "$ref": "#/definitions/智能任务",
+                        "originalRef": "智能任务"
+                    },
+                    "refType": "智能任务"
+                },
+                "articleDataVO": {
+                    "description": "发布数据信息",
+                    "$ref": "#/definitions/稿件数据",
+                    "originalRef": "稿件数据",
+                    "refType": "稿件数据"
+                },
+                "auditNodeList": {
+                    "type": "array",
+                    "description": "审核选择结点",
+                    "items": {
+                        "$ref": "#/definitions/流程节点",
+                        "originalRef": "流程节点"
+                    },
+                    "refType": "流程节点"
+                },
+                "author": {
+                    "type": "string",
+                    "description": "作者",
+                    "refType": null
+                },
+                "channelId": {
+                    "type": "string",
+                    "description": "渠道id",
+                    "refType": null
+                },
+                "channelVO": {
+                    "description": "渠道信息",
+                    "$ref": "#/definitions/渠道实体",
+                    "originalRef": "渠道实体",
+                    "refType": "渠道实体"
+                },
+                "content": {
+                    "type": "string",
+                    "description": "正文",
+                    "refType": null
+                },
+                "createUserCode": {
+                    "type": "string",
+                    "description": "创建人code",
+                    "refType": null
+                },
+                "createUserName": {
+                    "type": "string",
+                    "description": "创建人昵称",
+                    "refType": null
+                },
+                "create_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "创建时间，任何操作都不传，只读",
+                    "refType": null
+                },
+                "editUserCode": {
+                    "type": "string",
+                    "description": "编辑人code",
+                    "refType": null
+                },
+                "editUserName": {
+                    "type": "string",
+                    "description": "编辑人昵称",
+                    "refType": null
+                },
+                "extend": {
+                    "type": "array",
+                    "description": "自定义字段集合",
+                    "items": {
+                        "$ref": "#/definitions/自定字段信息",
+                        "originalRef": "自定字段信息"
+                    },
+                    "refType": "自定字段信息"
+                },
+                "follow": {
+                    "type": "string",
+                    "description": "内容是否跟随父稿",
+                    "refType": null
+                },
+                "gradeVO": {
+                    "description": "打分信息",
+                    "$ref": "#/definitions/分数实体",
+                    "originalRef": "分数实体",
+                    "refType": "分数实体"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "全局唯一主键，添加时不传，更新填写",
+                    "refType": null
+                },
+                "keyword": {
+                    "type": "string",
+                    "description": "关键词",
+                    "refType": null
+                },
+                "logos": {
+                    "type": "array",
+                    "description": "封面",
+                    "items": {
+                        "$ref": "#/definitions/素材信息",
+                        "originalRef": "素材信息"
+                    },
+                    "refType": "素材信息"
+                },
+                "materials": {
+                    "type": "array",
+                    "description": "除封面外的素材集合，新媒体稿里面的图片视频，音频，视频稿件的视频素材，图集里面的图片",
+                    "items": {
+                        "$ref": "#/definitions/素材信息",
+                        "originalRef": "素材信息"
+                    },
+                    "refType": "素材信息"
+                },
+                "parentId": {
+                    "type": "string",
+                    "description": "父稿id",
+                    "refType": null
+                },
+                "status": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "状态 -10 回收站 0 初稿/草稿 10 素材入库中 20 审核中 30 推送中 40 推送完成 50 推送失败 60 审核退回 70 审核通过",
+                    "refType": null
+                },
+                "statusStr": {
+                    "type": "string",
+                    "description": "状态字符表现形式 回收站 初稿/草稿 一级审核/二级审核/三级审核... 推送中 推送完成 推送失败 审核退回 审核通过",
+                    "refType": null
+                },
+                "summary": {
+                    "type": "string",
+                    "description": "摘要",
+                    "refType": null
+                },
+                "taskId": {
+                    "type": "string",
+                    "description": "任务id",
+                    "refType": null
+                },
+                "title": {
+                    "type": "string",
+                    "refType": null
+                },
+                "type": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "类型 1图文 2图片 5视频 7社交媒体",
+                    "refType": null
+                },
+                "update_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "修改时间，任何操作都不传，只读",
+                    "refType": null
+                }
+            },
+            "title": "稿件实体"
+        },
+        "稿件实体_1": {
+            "type": "object",
+            "required": [
+                "accountIdList"
+            ],
+            "properties": {
+                "accountIdList": {
+                    "type": "array",
+                    "description": "账号id列表",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "accountList": {
+                    "type": "array",
+                    "description": "账号信息",
+                    "items": {
+                        "$ref": "#/definitions/账号实体",
+                        "originalRef": "账号实体"
+                    }
+                },
+                "aiTaskVOList": {
+                    "type": "array",
+                    "description": "关联审核任务数据",
+                    "items": {
+                        "$ref": "#/definitions/智能任务",
+                        "originalRef": "智能任务"
+                    }
+                },
+                "articleDataVO": {
+                    "description": "发布数据信息",
+                    "$ref": "#/definitions/稿件数据",
+                    "originalRef": "稿件数据"
+                },
+                "auditNodeList": {
+                    "type": "array",
+                    "description": "审核选择结点",
+                    "items": {
+                        "$ref": "#/definitions/流程节点",
+                        "originalRef": "流程节点"
+                    }
+                },
+                "author": {
+                    "type": "string",
+                    "description": "作者"
+                },
+                "channelId": {
+                    "type": "string",
+                    "description": "渠道id"
+                },
+                "channelVO": {
+                    "description": "渠道信息",
+                    "$ref": "#/definitions/渠道实体_1",
+                    "originalRef": "渠道实体_1"
+                },
+                "content": {
+                    "type": "string",
+                    "description": "正文"
+                },
+                "createUserCode": {
+                    "type": "string",
+                    "description": "创建人code"
+                },
+                "createUserName": {
+                    "type": "string",
+                    "description": "创建人昵称"
+                },
+                "create_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "创建时间，任何操作都不传，只读"
+                },
+                "editUserCode": {
+                    "type": "string",
+                    "description": "编辑人code"
+                },
+                "editUserName": {
+                    "type": "string",
+                    "description": "编辑人昵称"
+                },
+                "extend": {
+                    "type": "array",
+                    "description": "自定义字段集合",
+                    "items": {
+                        "$ref": "#/definitions/自定字段信息",
+                        "originalRef": "自定字段信息"
+                    }
+                },
+                "follow": {
+                    "type": "string",
+                    "description": "内容是否跟随父稿"
+                },
+                "gradeVO": {
+                    "description": "打分信息",
+                    "$ref": "#/definitions/分数实体",
+                    "originalRef": "分数实体"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "全局唯一主键，添加时不传，更新填写"
+                },
+                "keyword": {
+                    "type": "string",
+                    "description": "关键词"
+                },
+                "logos": {
+                    "type": "array",
+                    "description": "封面",
+                    "items": {
+                        "$ref": "#/definitions/素材信息",
+                        "originalRef": "素材信息"
+                    }
+                },
+                "materials": {
+                    "type": "array",
+                    "description": "除封面外的素材集合，新媒体稿里面的图片视频，音频，视频稿件的视频素材，图集里面的图片",
+                    "items": {
+                        "$ref": "#/definitions/素材信息",
+                        "originalRef": "素材信息"
+                    }
+                },
+                "parentId": {
+                    "type": "string",
+                    "description": "父稿id"
+                },
+                "status": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "状态 -10 回收站 0 初稿/草稿 10 素材入库中 20 审核中 30 推送中 40 推送完成 50 推送失败 60 审核退回 70 审核通过"
+                },
+                "statusStr": {
+                    "type": "string",
+                    "description": "状态字符表现形式 回收站 初稿/草稿 一级审核/二级审核/三级审核... 推送中 推送完成 推送失败 审核退回 审核通过"
+                },
+                "summary": {
+                    "type": "string",
+                    "description": "摘要"
+                },
+                "taskId": {
+                    "type": "string",
+                    "description": "任务id"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "类型 1图文 2图片 5视频 7社交媒体"
+                },
+                "update_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "修改时间，任何操作都不传，只读"
+                }
+            },
+            "title": "稿件实体_1"
+        },
+        "稿件数据": {
+            "type": "object",
+            "properties": {
+                "accessNum": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "阅读量",
+                    "refType": null
+                },
+                "collectNum": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "收藏数",
+                    "refType": null
+                },
+                "commentNum": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "评论量",
+                    "refType": null
+                },
+                "create_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "创建时间，任何操作都不传，只读",
+                    "refType": null
+                },
+                "id": {
+                    "type": "string",
+                    "description": "全局唯一主键，添加时不传，更新填写",
+                    "refType": null
+                },
+                "likeNum": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "点赞量",
+                    "refType": null
+                },
+                "shareNum": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "转发量",
+                    "refType": null
+                },
+                "update_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "修改时间，任何操作都不传，只读",
+                    "refType": null
+                }
+            },
+            "title": "稿件数据"
+        },
+        "稿件日志实体": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "全局唯一主键，添加时不传，更新填写"
+                },
+                "note": {
+                    "type": "string",
+                    "description": "描述"
+                },
+                "state": {
+                    "type": "string",
+                    "description": "状态"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "操作的用户"
+                }
+            },
+            "title": "稿件日志实体"
+        },
+        "素材信息": {
+            "type": "object",
+            "properties": {
+                "contentId": {
+                    "type": "string",
+                    "description": "素材id",
+                    "refType": null
+                },
+                "fileguid": {
+                    "type": "string",
+                    "description": "文件GUID",
+                    "refType": null
+                },
+                "keyframe": {
+                    "type": "string",
+                    "description": "关键帧",
+                    "refType": null
+                },
+                "materialType": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "素材类型 1：图片，2：视频，3：音频",
+                    "refType": null
+                },
+                "url": {
+                    "type": "string",
+                    "description": "素材地址",
+                    "refType": null
+                }
+            },
+            "title": "素材信息"
+        },
+        "自定义字段实体": {
+            "type": "object",
+            "required": [
+                "code",
+                "must",
+                "name",
+                "showType",
+                "type"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "字段Code",
+                    "refType": null
+                },
+                "defaultValue": {
+                    "type": "string",
+                    "description": "默认值",
+                    "refType": null
+                },
+                "extend": {
+                    "description": "字段扩展信息",
+                    "$ref": "#/definitions/扩展属性",
+                    "originalRef": "扩展属性",
+                    "refType": "扩展属性"
+                },
+                "must": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "是否必填 1：必填 0 不必填",
+                    "refType": null
+                },
+                "name": {
+                    "type": "string",
+                    "description": "显示名",
+                    "refType": null
+                },
+                "showType": {
+                    "type": "array",
+                    "description": "稿件类型，哪些稿件类型下显式此字段。1表示图文，5表示视频",
+                    "items": {
+                        "type": "integer",
+                        "format": "int32",
+                        "enum": [
+                            1,
+                            5
+                        ]
+                    },
+                    "refType": "integer"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "字段类型对应的含义，文本框,文本域,下拉框,树形下拉框,时间选择器,标签",
+                    "enum": [
+                        "TEXT",
+                        "TEXTAREA",
+                        "SELECT",
+                        "TREE_SELECT",
+                        "DATETIME",
+                        "TAG",
+                        "THIRD_PAGE"
+                    ],
+                    "refType": null
+                }
+            },
+            "title": "自定义字段实体"
+        },
+        "自定义字段实体_1": {
+            "type": "object",
+            "required": [
+                "code",
+                "must",
+                "name",
+                "showType",
+                "type"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "字段Code"
+                },
+                "defaultValue": {
+                    "type": "string",
+                    "description": "默认值"
+                },
+                "extend": {
+                    "description": "字段扩展信息",
+                    "$ref": "#/definitions/扩展属性_1",
+                    "originalRef": "扩展属性_1"
+                },
+                "must": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "是否必填 1：必填 0 不必填"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "显示名"
+                },
+                "showType": {
+                    "type": "array",
+                    "description": "稿件类型，哪些稿件类型下显式此字段。1表示图文，5表示视频",
+                    "items": {
+                        "type": "integer",
+                        "format": "int32",
+                        "enum": [
+                            1,
+                            5
+                        ]
+                    }
+                },
+                "type": {
+                    "type": "string",
+                    "description": "字段类型对应的含义，文本框,文本域,下拉框,树形下拉框,时间选择器,标签",
+                    "enum": [
+                        "TEXT",
+                        "TEXTAREA",
+                        "SELECT",
+                        "TREE_SELECT",
+                        "DATETIME",
+                        "TAG",
+                        "THIRD_PAGE"
+                    ]
+                }
+            },
+            "title": "自定义字段实体_1"
+        },
+        "自定字段信息": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "字段code",
+                    "refType": null
+                },
+                "value": {
+                    "type": "object",
+                    "description": "字段值，所有类型都用字符串，如果遇到存储数组或者对象的值，使用json字符串化传递",
+                    "refType": null
+                }
+            },
+            "title": "自定字段信息"
+        },
+        "账号实体": {
+            "type": "object",
+            "required": [
+                "accountName",
+                "articleTypes",
+                "channelId",
+                "platName"
+            ],
+            "properties": {
+                "accountName": {
+                    "type": "string",
+                    "description": "帐号昵称",
+                    "refType": null
+                },
+                "articleTypes": {
+                    "type": "array",
+                    "description": "渠道支持的稿件类型，1图文，5视频",
+                    "items": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "refType": "integer"
+                },
+                "channelId": {
+                    "type": "string",
+                    "description": "渠道id",
+                    "refType": null
+                },
+                "clientId": {
+                    "type": "string",
+                    "description": "应用id",
+                    "refType": null
+                },
+                "clientSecret": {
+                    "type": "string",
+                    "description": "应用密钥",
+                    "refType": null
+                },
+                "create_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "创建时间，任何操作都不传，只读",
+                    "refType": null
+                },
+                "expired": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "账号是否过期， 1 表示过期，0表示正常",
+                    "refType": null
+                },
+                "extend": {
+                    "type": "object",
+                    "description": "扩展配置",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "refType": null
+                },
+                "headImg": {
+                    "type": "string",
+                    "description": "帐号头像",
+                    "refType": null
+                },
+                "id": {
+                    "type": "string",
+                    "description": "全局唯一主键，添加时不传，更新填写",
+                    "refType": null
+                },
+                "platName": {
+                    "type": "string",
+                    "description": "平台名称",
+                    "refType": null
+                },
+                "token": {
+                    "type": "string",
+                    "description": "令牌",
+                    "refType": null
+                },
+                "update_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "修改时间，任何操作都不传，只读",
+                    "refType": null
+                }
+            },
+            "title": "账号实体"
+        }
+    }
+}
